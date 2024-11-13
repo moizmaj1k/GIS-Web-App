@@ -1,0 +1,130 @@
+body, html {
+    height: 100%; /* Ensure the body and html take full height */
+    margin: 0; /* Remove default margin */
+    /* background-color: #acddde;  Change to your desired color */
+    background-color: #ADBBDA; /* Change to your desired color */
+
+}
+
+#map {
+    height: calc(100vh - 160px);
+    border: 2px solid #130E80;
+    border-radius: 0.25rem;
+}
+
+#side-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#table-container {
+    background: #f3f1f8;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    overflow-y: auto;
+    transition: height 0.3s ease; /* Smooth transition when height changes */
+}
+
+.smaller-table-container {
+    height: 50%; /* Reduce table height when card is visible */
+}
+
+#info-card {
+    display: none; /* Initially hidden */
+    overflow-y: auto;
+}
+
+
+/* Adjust the layout */
+.content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px; /* Add some space above the map and table */
+}
+
+.table {
+    table-layout: fixed; /* Use fixed table layout */
+    width: 100%; /* Ensure the table takes full width of the container */
+}
+
+.table th, .table td {
+    padding: 10px; /* Increase padding for better aesthetics */
+    overflow: hidden; /* Prevent overflow */
+    text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+    white-space: nowrap; /* Prevent wrapping of text */
+    max-width: 150px; /* Set a maximum width for cells */
+}
+.btn {
+    border-radius: 7px; /* Increase border-radius for more rounded corners */
+}
+
+/* Style for the nested dropdown */
+.nested-dropdown {
+    padding-left: 0px;
+}
+
+/* Make the submenu visible on hover */
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+/* Hide the dropdown menu by default */
+.dropdown-menu {
+    display: none;
+}
+
+/* Add a custom background color to the hovered item */
+.dropdown-item:hover {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+/* Optional: Add space between the parent dropdown and the nested items */
+.dropdown-submenu > .dropdown-menu {
+    left: 100%; /* Position the nested dropdown to the right */
+    top: 0;
+}
+
+.small-dropdown-item {
+    font-size: 0.875rem; /* Adjust the font size */
+    padding: 4px 8px; /* Adjust padding for a more compact look */
+}
+.narrow-dropdown-menu {
+    min-width: 130px; /* Adjust this width as needed */
+    padding: 4px;     /* Adjust padding for a tighter fit */
+}
+
+.small-table-container {
+    width: 200px; /* Set to a smaller width */
+}
+
+.table-sm th, .table-sm td {
+    padding: 0.25rem; /* Reduce cell padding for a more compact appearance */
+    font-size: 0.85rem; /* Adjust font size for a smaller look */
+}
+/* NAVBAR BUTTONS */
+#pk-button {
+    background-color: #8697C4;
+    color: rgb(237, 240, 250);
+    font-weight: bold;
+}
+#kpk-button {
+    background-color: #7091E6;
+    color: rgb(237, 240, 250);
+    font-weight: bold;
+}
+#kpk-boundaries-dropdown, #kpk-road-network-dropdown, #kpk-bridges-dropdown {
+    background-color: #7091E6;
+    color: rgb(237, 240, 250);
+    font-weight: bold;
+}
+#goback-button {
+    background-color: #8697C4;
+    color: rgb(237, 240, 250);
+    font-weight: bold;
+}
+#data-table tbody {
+    background: #f3f1f8;
+}

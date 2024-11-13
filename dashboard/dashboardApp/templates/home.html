@@ -1,0 +1,54 @@
+
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Home - GIS Application{% endblock %}
+
+
+{% block content %}
+<!-- TABLE AND MAP -->    
+<div class="content d-flex ml-3 mr-3" style="height: calc(100vh - 160px);">
+    <!-- Side container for card and table -->
+    <div id="side-container" class="d-flex flex-column" style="width: 360px;">
+        <!-- Card container, initially hidden -->
+        <div id="info-card" class="card mb-2 mr-3" style="display: none; height: 50%; overflow-y: auto; background-color: #f3f1f8;">
+            <div class="card-body">
+                <h5 class="card-title" id="district-roads">District Information</h5>
+                <!-- Initially, this paragraph will be replaced with a list of roads -->
+                <div id="road-list-container">
+                    <p class="card-text">Additional information about the selected district will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table container -->
+        <div id="table-container" class="mr-3" style="height: 100%; overflow-y: auto;">
+            <table id="data-table" class="table table-bordered table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data rows will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Map container takes the remaining horizontal space -->
+    <div id="map" style="flex-grow: 1; border: 2px solid #130E80; border-radius: 0.25rem;"></div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<!-- SCRIPT FOR INITIAL VIEW -->   
+<script src="{% static 'js/map-initial.js' %}"></script>
+<!-- SCRIPT FOR KPK VIEW -->
+<script src="{% static 'js/kpk-view.js' %}"></script>
+<!-- SCRIPT FOR GRAPH BUTTON ON MAP -->
+<script src="{% static 'js/graph-button.js' %}"></script>
+<!-- SCRIPT FOR STICKING LAYERS ON MAP -->
+<script src="{% static 'js/sticking-layers.js' %}"></script>
+{% endblock %}

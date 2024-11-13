@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GIS Application{% endblock %}</title>
+    <!-- IMPORTS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- MY STYLESHEET -->
+    <link rel="stylesheet" href="{% static 'css/home_styles.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- NAVBAR -->
+    <div class="container-fluid">
+        <h2 class="mt-2 ml-1" style="color: #092383;">GIS Application</h2>
+        <div class="card text-center mb-0" style="background: #f3f1f8;">
+            <div class="card-body p-2">                
+                <div class="d-flex justify-content-center flex-wrap">
+                    <button type="button" class="btn btn-sm m-2" id="goback-button" style="display: none;">Go Back</button>
+                    <button type="button" class="btn btn-sm m-2" id="pk-button" data-value="0">Pakistan</button>
+                    <button type="button" class="btn btn-sm m-2" id="pk-button" data-value="1">Provinces</button>
+                    <button type="button" class="btn btn-sm m-2" id="pk-button" data-value="2">Divisions</button>
+                    <button type="button" class="btn btn-sm m-2" id="pk-button" data-value="3">Districts</button>
+                    <button type="button" class="btn btn-sm m-2" id="kpk-button">KPK</button>
+                    
+                    <!-- Dropdown for KPK Boundaries -->
+                    <div class="dropdown m-2">
+                        <button class="btn btn-sm dropdown-toggle" type="button" id="kpk-boundaries-dropdown" style="display: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            KPK Boundaries
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-sm narrow-dropdown-menu" aria-labelledby="kpk-boundaries-dropdown">
+                            <li><button class="dropdown-item small-dropdown-item" type="button" id="kpk-div-button">KPK Divisions</button></li>
+                            <li><button class="dropdown-item small-dropdown-item" type="button" id="kpk-dis-button">KPK Districts</button></li>
+                        </ul>
+                    </div>
+                    <form method="POST" action="{% url 'index' %}">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-center flex-wrap">
+                            <!-- Existing buttons -->
+                            <!-- Dropdown for KPK Road Network -->
+                            <div class="dropdown m-2">
+                                <button class="btn btn-sm dropdown-toggle" type="button" style="display: none;" id="kpk-road-network-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    KPK Road Network
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-sm narrow-dropdown-menu" aria-labelledby="kpk-road-network-dropdown">
+                                    <!-- C&W Dropdown -->
+                                    <li class="dropdown-submenu small-dropdown-item p-0">
+                                        <button class="dropdown-item dropdown-toggle" type="button">C&W</button>
+                                        <ul class="dropdown-menu nested-dropdown dropdown-menu-sm narrow-dropdown-menu">
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="select_all" value="select_all">All Districts</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Buner" value="Buner">Buner</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Charsadda" value="Charsadda">Charsadda</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="D_I_Khan" value="D_I_Khan">D_I_Khan</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Dir Upper" value="Dir Upper">Dir Upper</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Hangu" value="Hangu">Hangu</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Karak" value="Karak">Karak</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Kohat" value="Kohat">Kohat</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Lakki Marwat" value="Lakki Marwat">Lakki Marwat</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Mardan" value="Mardan">Mardan</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Nowshera" value="Nowshera">Nowshera</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Shangla" value="Shangla">Shangla</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="road_network_entry" data-action="district" data-district="Swabi" value="Swabi">Swabi</button></li>
+                                        </ul>
+                                    </li>
+    
+                                    <!-- PKHA Dropdown -->
+                                    <li class="dropdown-submenu small-dropdown-item p-0">
+                                        <button class="dropdown-item dropdown-toggle" type="button">PKHA</button>
+                                        <ul class="dropdown-menu nested-dropdown dropdown-menu-sm narrow-dropdown-menu">
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="pkha_road_network_entry" data-action="pkha" data-pkha="select_all_pkha" value="select_all_pkha">All PKHA roads</button></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Dropdown for KPK Bridges -->
+                            <div class="dropdown m-2">
+                                <button class="btn btn-sm dropdown-toggle" type="button" style="display: none;" id="kpk-bridges-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    KPK Bridges
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-sm narrow-dropdown-menu" aria-labelledby="kpk-bridges-dropdown">
+                                    <!-- C&W Dropdown -->
+                                    <li class="dropdown-submenu small-dropdown-item p-0">
+                                        <button class="dropdown-item dropdown-toggle" type="button">C&W</button>
+                                        <ul class="dropdown-menu nested-dropdown dropdown-menu-sm narrow-dropdown-menu">
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="select_all" value="select_all">All Districts</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="NOWSHERA" value="NOWSHERA">NOWSHERA</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="SHANGLA" value="SHANGLA">SHANGLA</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="TORGHAR" value="TORGHAR">TORGHAR</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="BATTAGRAM" value="BATTAGRAM">BATTAGRAM</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="DIR LOWER" value="DIR LOWER">DIR LOWER</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="SWABI" value="SWABI">SWABI</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="SWAT" value="SWAT">SWAT</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="CHARSADDA" value="CHARSADDA">CHARSADDA</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="KOHISTAN" value="KOHISTAN">KOHISTAN</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="MANSEHRA" value="MANSEHRA">MANSEHRA</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="MALAKAND" value="MALAKAND">MALAKAND</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="BANNU" value="BANNU">BANNU</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="LAKKI MARWAT" value="LAKKI MARWAT">LAKKI MARWAT</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="D I K" value="D I K">D I K</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="BUNER" value="BUNER">BUNER</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="KARAK" value="KARAK">KARAK</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="HARIPUR" value="HARIPUR">HARIPUR</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="MARDAN" value="MARDAN">MARDAN</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="PESHAWAR" value="PESHAWAR">PESHAWAR</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="DIR UPPER" value="DIR UPPER">DIR UPPER</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="ABBOTTABAD" value="ABBOTTABAD">ABBOTTABAD</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="KOHAT" value="KOHAT">KOHAT</button></li>
+                                            <li><button class="dropdown-item small-dropdown-item" type="submit" name="bridge_network_entry" data-action="bridge" data-bridgeDistrict="CHITRAL" value="CHITRAL">CHITRAL</button></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    {% block content %}{% endblock %}
+
+    <!-- SCRIPTS BLOCKS -->
+    {% block scripts %}{% endblock %}
+</body>
+</html>
