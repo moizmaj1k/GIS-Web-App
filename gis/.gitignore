@@ -1,2 +1,29 @@
+# Django specific
 db.sqlite3
 /static
+/media  # User-uploaded files
+*.py[cod]  # Compiled Python files
+__pycache__/  # Python cache folders
+*.log  # Log files
+
+# Environment variables and settings
+.env  # Environment variables file if you’re using one
+*.env  # Catch any other environment files
+*.secret  # Catch any secret files with different naming conventions
+
+# IDE-specific and OS-specific files
+.idea/  # PyCharm files
+.vscode/  # Visual Studio Code files
+*.swp  # Swap files from text editors
+.DS_Store  # macOS-specific file
+Thumbs.db  # Windows-specific file
+
+# Virtual environment folders
+venv/
+env/
+venv.bak/
+
+# Temporary and backup files
+*.bak
+*.tmp
+*.old
