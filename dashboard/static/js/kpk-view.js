@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         
                         // Define a custom bridge icon
                         const bridgeIcon = L.icon({
-                            iconUrl: "static/images/bridge_new.png", // Path to your bridge icon image
+                            iconUrl: "static/images/bridge.png", // Path to your bridge icon image
                             iconSize: [32, 32], // Size of the icon (width, height)
                             iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location (centered at the bottom)
                             popupAnchor: [0, -32] // Position of the popup relative to the icon
@@ -290,7 +290,7 @@ function viewSpecificBridge(bridgeName) {
             }
             // Define a custom bridge icon
             const bridgeIcon = L.icon({
-                iconUrl: "static/images/bridge_new.png", // Path to your bridge icon image
+                iconUrl: "static/images/bridge.png", // Path to your bridge icon image
                 iconSize: [32, 32], // Size of the icon (width, height)
                 iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location (centered at the bottom)
                 popupAnchor: [0, -32] // Position of the popup relative to the icon
